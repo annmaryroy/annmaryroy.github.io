@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ann Mary Roy — RTL &amp; ASIC Design Engineer</title>
+<meta name="description" content="M.Tech VLSI &amp; Embedded Systems student — RTL design, FPGA, ASIC (RTL to GDSII), RISC-V, and verification. Currently a VLSI Intern at IndusIP Labs.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ann Mary Roy — RTL & ASIC Design Engineer">
+<meta property="og:description" content="M.Tech VLSI & Embedded Systems student — RTL design, FPGA, ASIC (RTL to GDSII), RISC-V, and verification. Currently a VLSI Intern at IndusIP Labs.">
+<meta property="og:image" content="https://annmaryroy.github.io/og-image.png">
+<meta property="og:url" content="https://annmaryroy.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ann Mary Roy — RTL & ASIC Design Engineer">
+<meta name="twitter:description" content="M.Tech VLSI & Embedded Systems student — RTL, FPGA, ASIC, RISC-V, and verification.">
+<meta name="twitter:image" content="https://annmaryroy.github.io/og-image.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -130,6 +147,7 @@
   .ic-card h3 a{text-decoration:none;color:var(--text);border-bottom:1px dashed var(--line);}
   .ic-card h3 a:hover{color:var(--amber);border-color:var(--amber);}
   .ic-card h3.no-link{color:var(--text);}
+  .ic-diagram{margin:2px 0 16px;padding:10px 4px;border:1px solid var(--line-soft);background:var(--bg);border-radius:2px;}
   .ic-card p{color:var(--muted);font-size:14px;margin-bottom:16px;flex:1;}
   .ic-foot{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;margin-top:auto;}
   .lang-tag{color:var(--amber);letter-spacing:0.5px;}
@@ -199,7 +217,8 @@
     </div>
 
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#projects">View projects →</a>
+      <a class="btn btn-primary" href="AnnMaryRoy_CV.pdf" download>Download Resume ↓</a>
+      <a class="btn btn-outline" href="#projects">View projects →</a>
       <a class="btn btn-outline" href="https://github.com/annmaryroy" target="_blank" rel="noopener">GitHub ↗</a>
       <a class="btn btn-outline" href="https://www.linkedin.com/in/annmaryroy/" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
@@ -327,6 +346,35 @@
         <div class="pins bottom"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="ic-index"><span>U1 — ASIC FLOW</span><span>Oct 25 – Feb 26</span></div>
         <h3><a href="https://github.com/annmaryroy/RTL-to-GDS-ASIC-Flow-Cadence" target="_blank" rel="noopener">RTL to GDSII ASIC Design Flow Implementation</a></h3>
+        <div class="ic-diagram">
+          <svg viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <defs>
+              <marker id="arrowASIC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" style="fill:var(--amber)"/>
+              </marker>
+            </defs>
+            <g style="font-family:var(--mono);">
+              <rect x="0" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="24" y="33" text-anchor="middle" font-size="8.5" style="fill:var(--text)">RTL</text>
+              <line x1="48" y1="29" x2="61" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowASIC)"/>
+
+              <rect x="63" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="87" y="33" text-anchor="middle" font-size="7.5" style="fill:var(--text)">SYNTH</text>
+              <line x1="111" y1="29" x2="124" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowASIC)"/>
+
+              <rect x="126" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="150" y="33" text-anchor="middle" font-size="8" style="fill:var(--text)">P&amp;R</text>
+              <line x1="174" y1="29" x2="187" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowASIC)"/>
+
+              <rect x="189" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="213" y="33" text-anchor="middle" font-size="7" style="fill:var(--text)">STA/LEC</text>
+              <line x1="237" y1="29" x2="250" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowASIC)"/>
+
+              <rect x="252" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--amber);stroke-width:1.5"/>
+              <text x="276" y="33" text-anchor="middle" font-size="7.5" style="fill:var(--amber)">GDSII</text>
+            </g>
+          </svg>
+        </div>
         <p>Implemented a complete RTL-to-GDSII flow covering RTL coding, synthesis, and physical design (floorplanning, placement, CTS, routing). Performed Logical Equivalence Checking (LEC) and Static Timing Analysis (STA) to achieve timing closure.</p>
         <div class="ic-foot"><span class="lang-tag">● Tcl</span><a class="view-link" href="https://github.com/annmaryroy/RTL-to-GDS-ASIC-Flow-Cadence" target="_blank" rel="noopener">Repo ↗</a></div>
       </div>
@@ -336,6 +384,35 @@
         <div class="pins bottom"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="ic-index"><span>U2 — CPU CORE</span><span>Dec 25 – Jan 26</span></div>
         <h3><a href="https://github.com/annmaryroy/RV32I-Single-Cycle-Processor" target="_blank" rel="noopener">RV32I Single-Cycle Processor</a></h3>
+        <div class="ic-diagram">
+          <svg viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <defs>
+              <marker id="arrowRV32I" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" style="fill:var(--amber)"/>
+              </marker>
+            </defs>
+            <g style="font-family:var(--mono);">
+              <rect x="0" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="24" y="33" text-anchor="middle" font-size="8.5" style="fill:var(--text)">IF</text>
+              <line x1="48" y1="29" x2="61" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowRV32I)"/>
+
+              <rect x="63" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="87" y="33" text-anchor="middle" font-size="8.5" style="fill:var(--text)">ID</text>
+              <line x1="111" y1="29" x2="124" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowRV32I)"/>
+
+              <rect x="126" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="150" y="33" text-anchor="middle" font-size="7.5" style="fill:var(--text)">ALU/EX</text>
+              <line x1="174" y1="29" x2="187" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowRV32I)"/>
+
+              <rect x="189" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--line)"/>
+              <text x="213" y="33" text-anchor="middle" font-size="7.5" style="fill:var(--text)">MEM</text>
+              <line x1="237" y1="29" x2="250" y2="29" style="stroke:var(--amber);stroke-width:1.5" marker-end="url(#arrowRV32I)"/>
+
+              <rect x="252" y="15" width="48" height="28" rx="2" style="fill:var(--panel-alt);stroke:var(--amber);stroke-width:1.5"/>
+              <text x="276" y="33" text-anchor="middle" font-size="8" style="fill:var(--amber)">WB</text>
+            </g>
+          </svg>
+        </div>
         <p>Designed an RV32I RISC-V processor including datapath, ALU, register file, and control unit. Verified functionality using RTL simulation and a modular testbench methodology.</p>
         <div class="ic-foot"><span class="lang-tag">● Verilog</span><a class="view-link" href="https://github.com/annmaryroy/RV32I-Single-Cycle-Processor" target="_blank" rel="noopener">Repo ↗</a></div>
       </div>
