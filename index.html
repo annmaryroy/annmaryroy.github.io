@@ -1,527 +1,492 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Ann Mary Roy — VLSI / RTL / ASIC Engineer</title>
-  <meta name="description" content="Ann Mary Roy — M.Tech VLSI & Embedded Systems. RTL Design, FPGA, ASIC (RTL→GDSII), RISC‑V, Verification, DFT, STA." />
+  <meta name="description" content="Ann Mary Roy — VLSI / RTL / ASIC Engineer. RTL Design, RISC‑V, ASIC (RTL→GDSII), STA, Verification, FPGA/SoC." />
 
-  <!-- Open Graph -->
+  <!-- OpenGraph -->
   <meta property="og:title" content="Ann Mary Roy — VLSI / RTL / ASIC Engineer" />
-  <meta property="og:description" content="RTL Design · FPGA · ASIC (RTL→GDSII) · RISC‑V · Verification · DFT · STA" />
+  <meta property="og:description" content="RTL Design · ASIC Flow · RISC‑V · STA · Verification · FPGA/SoC" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://annmaryroy.github.io/" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
     :root{
-      --bg:#0A0E12;
-      --panel:#10151B;
-      --panel2:#141B22;
-      --line:#232D37;
-      --text:#E9EDF1;
-      --muted:#97A6B5;
-      --amber:#FFB000;
-      --copper:#C97A4A;
-      --mono:'IBM Plex Mono', ui-monospace, monospace;
-      --sans:'IBM Plex Sans', system-ui, sans-serif;
-      --max:1100px;
-      --r:10px;
+      --bg:#F7F9FC;
+      --panel:#FFFFFF;
+      --text:#0B1320;
+      --muted:#4B5565;
+      --line:#E3E8F2;
+      --accent:#1E3A8A;     /* deep navy */
+      --accent2:#0F766E;    /* teal */
+      --chip:#F1F5FF;       /* soft blue */
+      --shadow: 0 10px 25px rgba(15,23,42,.08);
+      --r: 14px;
+      --max: 1080px;
+
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      background:var(--bg);
-      color:var(--text);
       font-family:var(--sans);
-      line-height:1.6;
-      background-image:
-        linear-gradient(rgba(35,45,55,.45) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(35,45,55,.45) 1px, transparent 1px);
-      background-size:40px 40px;
-      background-attachment:fixed;
+      color:var(--text);
+      background:linear-gradient(180deg, #FFFFFF 0%, var(--bg) 60%, #FFFFFF 100%);
+      line-height:1.55;
     }
     a{color:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
-    .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-    }
-    .skip{
-      position:absolute; left:12px; top:12px; padding:10px 12px;
-      background:var(--amber); color:#0A0E12; border-radius:8px;
-      transform:translateY(-200%); transition:.2s; font-family:var(--mono); font-weight:700;
-      z-index:999;
-    }
-    .skip:focus{transform:translateY(0)}
-    nav{
-      position:sticky; top:0; z-index:50;
-      background:rgba(10,14,18,0.85);
-      backdrop-filter:blur(8px);
-      border-bottom:1px solid var(--line);
-    }
-    nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
-    .logo{
-      font-family:var(--mono); font-weight:700; font-size:13px;
-      text-decoration:none; letter-spacing:.5px;
-    }
-    .logo span{color:var(--amber)}
-    .navlinks{display:none; list-style:none; gap:18px; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.8px;}
-    .navlinks a{color:var(--muted); text-decoration:none}
-    .navlinks a:hover{color:var(--amber)}
-    @media(min-width:860px){ .navlinks{display:flex;} }
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 
-    header{
-      padding:56px 0 24px 0;
+    /* Top nav */
+    .top{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
-      position:relative; overflow:hidden;
     }
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      font-family:var(--mono); font-size:11px; letter-spacing:1.2px;
-      color:var(--amber); border:1px solid rgba(255,176,0,.35);
-      padding:6px 10px; border-radius:999px; text-transform:uppercase;
-      background:rgba(16,21,27,.55);
+    .top .wrap{
+      height:64px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
     }
-    h1{
+    .brand{
+      text-decoration:none;
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .mark{
+      width:32px;height:32px;border-radius:10px;
+      background:linear-gradient(135deg, var(--accent) 0%, #0B5BD3 100%);
+      box-shadow:0 8px 18px rgba(30,58,138,.25);
+    }
+    .brand small{
+      display:block;
       font-family:var(--mono);
-      font-size:clamp(34px, 6vw, 64px);
-      line-height:1.05;
-      letter-spacing:-1px;
-      margin-top:18px;
-    }
-    .sub{
-      margin-top:14px;
-      max-width:72ch;
+      font-size:11px;
+      font-weight:700;
       color:var(--muted);
-      font-family:var(--mono);
-      font-size:clamp(13px, 2vw, 16px);
-      border-left:2px solid var(--copper);
-      padding-left:14px;
+      margin-top:2px;
+      letter-spacing:.5px;
     }
-    .meta{
-      display:flex; flex-wrap:wrap; gap:10px 18px;
-      margin-top:18px;
-      color:var(--muted);
-      font-family:var(--mono);
-      font-size:12.5px;
-    }
-    .meta a{color:var(--muted); text-decoration:none}
-    .meta a:hover{color:var(--amber)}
-    .actions{
-      display:flex; flex-wrap:wrap; gap:12px;
-      margin-top:22px;
-    }
+    nav{display:none; gap:18px; font-size:13px}
+    nav a{color:var(--muted); text-decoration:none}
+    nav a:hover{color:var(--accent)}
+    @media(min-width:860px){ nav{display:flex;} }
+
+    /* Buttons */
+    .btns{display:flex; gap:10px; flex-wrap:wrap}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:12px 16px;
-      font-family:var(--mono);
-      font-size:13px;
-      border-radius:10px;
+      padding:10px 14px;
+      border-radius:12px;
       border:1px solid transparent;
       text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      transition:.15s;
       cursor:pointer;
-      transition:.18s;
-      background:none;
+      white-space:nowrap;
     }
-    .primary{background:var(--amber); color:#0A0E12; font-weight:800;}
-    .primary:hover{filter:brightness(1.06)}
-    .outline{border-color:var(--line); color:var(--text); background:rgba(16,21,27,.45)}
-    .outline:hover{border-color:rgba(255,176,0,.5); color:var(--amber)}
-    .ghost{border-color:transparent; color:var(--muted)}
-    .ghost:hover{color:var(--text)}
+    .btn.primary{background:var(--accent); color:#fff; box-shadow:0 12px 22px rgba(30,58,138,.18)}
+    .btn.primary:hover{filter:brightness(1.03)}
+    .btn.outline{border-color:var(--line); color:var(--text); background:#fff}
+    .btn.outline:hover{border-color:rgba(30,58,138,.25); color:var(--accent)}
+    .btn.ghost{color:var(--muted); background:transparent; border-color:transparent}
+    .btn.ghost:hover{color:var(--accent)}
 
-    section{padding:64px 0; border-bottom:1px solid var(--line);}
-    .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:26px;}
-    .sec-num{font-family:var(--mono); color:var(--copper); font-size:13px;}
-    h2{font-family:var(--mono); font-size:clamp(20px, 3.5vw, 28px); letter-spacing:-.3px;}
-    .sec-line{flex:1; height:1px; background:var(--line);}
+    /* Hero */
+    header{
+      padding:56px 0 26px 0;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media(max-width:920px){ .hero{grid-template-columns:1fr;} }
 
-    .grid{display:grid; gap:18px;}
-    .two{grid-template-columns:1.3fr 1fr;}
-    @media(max-width:900px){ .two{grid-template-columns:1fr;} }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(15,118,110,.08);
+      border:1px solid rgba(15,118,110,.18);
+      color:var(--accent2);
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:12px;
+    }
+    h1{
+      font-size:clamp(30px, 4.8vw, 52px);
+      letter-spacing:-.8px;
+      margin-top:14px;
+    }
+    .subtitle{
+      color:var(--muted);
+      margin-top:12px;
+      max-width:72ch;
+      font-size:15.5px;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:10px 16px;
+      margin-top:14px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .meta a{color:var(--muted); text-decoration:none}
+    .meta a:hover{color:var(--accent)}
 
-    .card{
-      background:rgba(16,21,27,.75);
+    .panel{
+      background:var(--panel);
       border:1px solid var(--line);
       border-radius:var(--r);
-      padding:20px;
+      box-shadow:var(--shadow);
+      padding:18px;
     }
-    .card h3{
-      font-family:var(--mono);
-      font-size:15px;
+    .panel h3{
+      font-size:14px;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+      color:var(--muted);
       margin-bottom:10px;
     }
-    .muted{color:var(--muted)}
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
-    .chip{
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:10px;
       font-family:var(--mono);
+      font-size:12px;
+      padding:10px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .kv:last-child{border-bottom:none}
+    .kv span:first-child{color:var(--muted)}
+    .kv span:last-child{font-weight:800;color:var(--text)}
+
+    /* Sections */
+    section{padding:44px 0;border-top:1px solid var(--line)}
+    .sec-head{
+      display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+      margin-bottom:16px;
+    }
+    .sec-head h2{
+      font-size:15px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-family:var(--mono);
+    }
+
+    /* Project cards */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:14px;
+    }
+    .span6{grid-column:span 6}
+    .span4{grid-column:span 4}
+    .span8{grid-column:span 8}
+    .span12{grid-column:span 12}
+    @media(max-width:920px){
+      .span6,.span4,.span8{grid-column:span 12}
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      padding:18px;
+      transition:transform .15s, border-color .15s;
+    }
+    .card:hover{transform:translateY(-2px); border-color:rgba(30,58,138,.18)}
+    .kicker{
+      font-family:var(--mono);
+      font-size:11px;
+      color:var(--muted);
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .card h3{font-size:18px; letter-spacing:-.3px}
+    .desc{color:var(--muted); margin-top:8px; font-size:14.5px}
+    ul{margin-top:10px; padding-left:18px}
+    li{margin:6px 0; color:var(--muted); font-size:14px}
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      background:var(--chip);
+      border:1px solid rgba(30,58,138,.12);
+      color:var(--accent);
+      font-family:var(--mono);
+      font-weight:800;
       font-size:11px;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(20,27,34,.85);
-      color:var(--text);
     }
-    .chip.strong{border-color:rgba(255,176,0,.35); color:var(--amber)}
-    .list{margin-top:10px; padding-left:18px; color:var(--muted)}
-    .list li{margin:6px 0}
-
-    .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:16px;}
-    .proj-top{display:flex; justify-content:space-between; gap:12px; align-items:flex-start;}
-    .proj-kicker{font-family:var(--mono); font-size:11px; color:var(--copper); letter-spacing:1px; text-transform:uppercase;}
-    .proj-links{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;}
-    .proj-links a{font-family:var(--mono); font-size:12px; color:var(--muted); text-decoration:none; border-bottom:1px dashed var(--line);}
-    .proj-links a:hover{color:var(--amber); border-color:rgba(255,176,0,.5)}
-    .featured{border-color:rgba(255,176,0,.35)}
-    .callout{
-      padding:14px 16px;
-      border:1px solid rgba(255,176,0,.25);
-      background:rgba(255,176,0,.06);
-      border-radius:var(--r);
+    .links{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
+    .links a{
+      font-family:var(--mono);
+      font-size:12px;
       color:var(--muted);
+      text-decoration:none;
+      border-bottom:1px dashed var(--line);
+      padding-bottom:2px;
     }
-    footer{padding:64px 0 48px 0;}
-    .foot{
-      display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
-      padding-top:18px; border-top:1px solid var(--line);
-      color:var(--muted); font-family:var(--mono); font-size:11px;
+    .links a:hover{color:var(--accent); border-color:rgba(30,58,138,.22)}
+
+    footer{
+      padding:34px 0 56px 0;
+      color:var(--muted);
+      font-family:var(--mono);
+      font-size:11px;
     }
   </style>
 </head>
 
 <body>
-<a class="skip" href="#content">Skip to content</a>
+  <div class="top">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <span class="mark" aria-hidden="true"></span>
+        <span>
+          Ann Mary Roy
+          <small>VLSI · RTL · ASIC · Verification</small>
+        </span>
+      </a>
 
-<nav>
-  <div class="wrap">
-    <a class="logo" href="#top">AMR<span>://</span>vlsi</a>
-    <ul class="navlinks">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+      <nav aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-<header id="top">
-  <div class="wrap">
-    <span class="tag">Open to Full-Time Roles — RTL / ASIC / Verification</span>
-
-    <h1>Ann Mary Roy<span style="color:var(--amber)">.</span></h1>
-
-    <p class="sub">
-      M.Tech (VLSI & Embedded Systems), CUSAT — building digital systems from <b>RTL → Synthesis → PnR → STA</b>.
-      Interests: <b>RISC‑V</b>, ASIC flows, FPGA/SoC, verification, DFT.
-    </p>
-
-    <div class="meta" aria-label="Contact info">
-      <span><b style="color:var(--text);font-weight:600;">India</b></span>
-      <a href="mailto:annmaryroy365@gmail.com">annmaryroy365@gmail.com</a>
-      <a href="tel:+919744100107">+91 97441 00107</a>
-      <a href="https://github.com/annmaryroy" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/annmaryroy/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-
-    <div class="actions">
-      <a class="btn primary" href="#projects">View Featured Projects</a>
-
-      <!-- TODO: replace resume link -->
-      <a class="btn outline" href="RESUME.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
-
-      <a class="btn ghost" href="mailto:annmaryroy365@gmail.com">Email</a>
-    </div>
-
-    <div style="margin-top:18px" class="callout">
-      <b style="color:var(--amber)">Recruiter keywords:</b>
-      RTL Design · SystemVerilog · Verilog · STA · CTS · PnR · LEC · DFT · FPGA · AXI · RISC‑V · Cadence · Vivado
+      <div class="btns">
+        <!-- TODO: upload RESUME.pdf in the repo -->
+        <a class="btn outline" href="RESUME.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn primary" href="mailto:annmaryroy365@gmail.com">Email</a>
+      </div>
     </div>
   </div>
-</header>
 
-<main id="content">
-  <section id="projects">
+  <header id="top">
     <div class="wrap">
-      <div class="sec-head"><span class="sec-num">01</span><h2>Featured Projects</h2><div class="sec-line"></div></div>
-
-      <div class="projects">
-        <article class="card featured">
-          <div class="proj-top">
-            <div class="proj-kicker">ASIC FLOW · RTL → GDSII</div>
-            <div class="proj-kicker">Oct 2025 – Feb 2026</div>
-          </div>
-          <h3>RTL to GDSII ASIC Design Flow (Cadence)</h3>
-          <p class="muted">
-            Implemented an end-to-end RTL-to-GDSII flow: synthesis, floorplan, placement, CTS, routing, STA and signoff checks.
+      <div class="hero">
+        <div>
+          <span class="pill">Open to Full‑Time Roles</span>
+          <h1>Engineer focused on RTL design, ASIC flows, and RISC‑V systems.</h1>
+          <p class="subtitle">
+            M.Tech (VLSI & Embedded Systems), CUSAT. Hands-on projects across RTL → synthesis → PnR → STA,
+            plus FPGA/SoC integration and verification workflows.
           </p>
-          <ul class="list">
-            <li>Ran <b>LEC</b> (equivalence) and <b>STA</b> iterations for timing closure.</li>
-            <li>Produced scripts and reports for repeatable runs (Tcl-based flow).</li>
-            <li><i>Tip:</i> add one timing/area number here when available.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip strong">Cadence</span><span class="chip">Genus</span><span class="chip">Innovus</span><span class="chip">Tempus</span><span class="chip">Conformal LEC</span><span class="chip">Tcl</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/annmaryroy/RTL-to-GDS-ASIC-Flow-Cadence" target="_blank" rel="noopener">Repo ↗</a>
-          </div>
-        </article>
 
-        <article class="card featured">
-          <div class="proj-top">
-            <div class="proj-kicker">CPU CORE · RISC‑V</div>
-            <div class="proj-kicker">Dec 2025 – Jan 2026</div>
+          <div class="meta">
+            <span>India</span>
+            <a href="mailto:annmaryroy365@gmail.com">annmaryroy365@gmail.com</a>
+            <a href="tel:+919744100107">+91 97441 00107</a>
+            <a href="https://github.com/annmaryroy" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/annmaryroy/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
-          <h3>RV32I Single-Cycle Processor (RTL + Verification)</h3>
-          <p class="muted">
-            Designed datapath, ALU, register file and control unit for an RV32I single-cycle core and verified functionality using RTL simulation.
-          </p>
-          <ul class="list">
-            <li>Built a modular testbench and debug workflow for instruction-level validation.</li>
-            <li><i>Tip:</i> mention supported instructions + test count/coverage.</li>
-          </ul>
-          <div class="chips">
-            <span class="chip strong">Verilog</span><span class="chip">RISC‑V</span><span class="chip">RTL Simulation</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/annmaryroy/RV32I-Single-Cycle-Processor" target="_blank" rel="noopener">Repo ↗</a>
-          </div>
-        </article>
 
-        <article class="card">
-          <div class="proj-top">
-            <div class="proj-kicker">SoC/FPGA · AXI</div>
-            <div class="proj-kicker">Jan 2026 – Mar 2026</div>
+          <div class="btns" style="margin-top:16px">
+            <a class="btn primary" href="#projects">View Featured Projects</a>
+            <a class="btn outline" href="#contact">Contact</a>
           </div>
-          <h3>Zynq Custom AXI Peripheral (Vivado/Vitis)</h3>
-          <p class="muted">
-            Implemented FPGA SoC design flows using Zynq architecture, integrating AXI peripherals and validating in hardware.
-          </p>
-          <div class="chips">
-            <span class="chip strong">Vivado</span><span class="chip">Vitis</span><span class="chip">AXI</span><span class="chip">Zynq</span><span class="chip">Tcl</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/annmaryroy/Zynq-Custom-AXI-Peripheral" target="_blank" rel="noopener">Repo ↗</a>
-          </div>
-        </article>
+        </div>
 
-        <article class="card">
-          <div class="proj-top">
-            <div class="proj-kicker">DFT / STA / GLS</div>
-            <div class="proj-kicker">Nov 2025 – Mar 2026</div>
-          </div>
-          <h3>ASIC Verification, DFT & Timing Analysis</h3>
-          <p class="muted">
-            Worked on gate-level / SDF timing simulation workflows and scan-based DFT for sequential circuits using a 90nm library setup.
-          </p>
-          <div class="chips">
-            <span class="chip strong">SystemVerilog</span><span class="chip">Xcelium</span><span class="chip">SDF</span><span class="chip">DFT</span><span class="chip">STA</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="proj-top">
-            <div class="proj-kicker">Custom IC</div>
-            <div class="proj-kicker">Jul 2025 – Aug 2025</div>
-          </div>
-          <h3>Custom IC Design (Cadence Virtuoso)</h3>
-          <p class="muted">
-            Designed CMOS inverter / logic gates, performed MOSFET characterization, schematic + layout, and post-layout checks.
-          </p>
-          <div class="chips">
-            <span class="chip strong">Virtuoso</span><span class="chip">CMOS</span><span class="chip">Layout</span>
-          </div>
-        </article>
-      </div>
-
-      <div style="margin-top:18px" class="callout">
-        <b style="color:var(--amber)">Next upgrade that boosts interviews:</b>
-        add 1–2 images per featured project (waveforms / layout / timing report screenshot) and a short “Case Study” link.
+        <aside class="panel">
+          <h3>Snapshot</h3>
+          <div class="kv"><span>Degree</span><span>M.Tech (VLSI & ES)</span></div>
+          <div class="kv"><span>Institution</span><span>CUSAT</span></div>
+          <div class="kv"><span>Core areas</span><span>RTL · STA · PnR</span></div>
+          <div class="kv"><span>Tooling</span><span>Cadence · Vivado</span></div>
+          <div class="kv"><span>Status</span><span style="color:var(--accent2)">Job seeking</span></div>
+        </aside>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section id="skills">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">02</span><h2>Skills & Tools</h2><div class="sec-line"></div></div>
-
-      <div class="grid two">
-        <div class="card">
-          <h3>Core Skills</h3>
-          <div class="chips">
-            <span class="chip strong">RTL Design</span>
-            <span class="chip">ASIC Flow</span>
-            <span class="chip">Synthesis</span>
-            <span class="chip">PnR / CTS</span>
-            <span class="chip">STA</span>
-            <span class="chip">LEC</span>
-            <span class="chip">DFT (Scan)</span>
-            <span class="chip">Verification</span>
-            <span class="chip">FPGA / SoC</span>
-            <span class="chip">RISC‑V</span>
-          </div>
+  <main>
+    <section id="projects">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Featured Projects</h2>
         </div>
 
-        <div class="card">
-          <h3>Languages</h3>
-          <div class="chips">
-            <span class="chip strong">Verilog</span>
-            <span class="chip strong">SystemVerilog</span>
-            <span class="chip">C / Embedded C</span>
-            <span class="chip">Python</span>
-            <span class="chip">Tcl</span>
-          </div>
-        </div>
+        <div class="grid">
+          <article class="card span6">
+            <div class="kicker"><span>ASIC FLOW · RTL → GDSII</span><span>Oct 2025 – Feb 2026</span></div>
+            <h3>RTL to GDSII ASIC Flow (Cadence)</h3>
+            <p class="desc">End-to-end flow covering synthesis, floorplan, placement, CTS, routing, STA and signoff checks.</p>
+            <ul>
+              <li>Used STA iterations and report-driven fixes toward timing closure.</li>
+              <li>Validated equivalence using LEC; automated flow steps with Tcl.</li>
+              <li><b>Tip:</b> add one metric here (WNS/TNS/Fmax/area).</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">Genus</span><span class="chip">Innovus</span><span class="chip">Tempus</span><span class="chip">Conformal LEC</span><span class="chip">Tcl</span>
+            </div>
+            <div class="links">
+              <a href="https://github.com/annmaryroy/RTL-to-GDS-ASIC-Flow-Cadence" target="_blank" rel="noopener">Repo ↗</a>
+            </div>
+          </article>
 
-        <div class="card">
-          <h3>EDA / Tools</h3>
-          <div class="chips">
-            <span class="chip strong">Cadence</span>
-            <span class="chip">Virtuoso</span>
-            <span class="chip">Genus</span>
-            <span class="chip">Innovus</span>
-            <span class="chip">Tempus</span>
-            <span class="chip">Voltus</span>
-            <span class="chip">Conformal LEC</span>
-            <span class="chip">Xcelium</span>
-            <span class="chip strong">Vivado</span>
-            <span class="chip">Vitis</span>
-          </div>
-        </div>
+          <article class="card span6">
+            <div class="kicker"><span>CPU CORE · RISC‑V</span><span>Dec 2025 – Jan 2026</span></div>
+            <h3>RV32I Single‑Cycle Processor</h3>
+            <p class="desc">Designed datapath + control for an RV32I single-cycle core and verified using RTL simulation.</p>
+            <ul>
+              <li>Implemented ALU, register file, control unit and instruction decode.</li>
+              <li>Built modular testbench; debugged using waveforms.</li>
+              <li><b>Tip:</b> add supported instructions + test count/coverage.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">Verilog</span><span class="chip">RISC‑V</span><span class="chip">RTL Simulation</span>
+            </div>
+            <div class="links">
+              <a href="https://github.com/annmaryroy/RV32I-Single-Cycle-Processor" target="_blank" rel="noopener">Repo ↗</a>
+            </div>
+          </article>
 
-        <div class="card">
-          <h3>Platforms</h3>
-          <div class="chips">
-            <span class="chip">STM32</span>
-            <span class="chip">ARM Cortex‑M</span>
-            <span class="chip strong">Zybo Z7</span>
-            <span class="chip">Raspberry Pi</span>
-            <span class="chip">Arduino</span>
+          <article class="card span6">
+            <div class="kicker"><span>FPGA/SoC · AXI</span><span>Jan 2026 – Mar 2026</span></div>
+            <h3>Zynq Custom AXI Peripheral</h3>
+            <p class="desc">SoC integration using Zynq with AXI peripherals; synthesis and hardware validation.</p>
+            <ul>
+              <li>Integrated AXI IP and validated end-to-end data path.</li>
+              <li><b>Tip:</b> mention throughput/latency or demo details.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">Vivado</span><span class="chip">Vitis</span><span class="chip">AXI</span><span class="chip">Zynq</span>
+            </div>
+            <div class="links">
+              <a href="https://github.com/annmaryroy/Zynq-Custom-AXI-Peripheral" target="_blank" rel="noopener">Repo ↗</a>
+            </div>
+          </article>
+
+          <article class="card span6">
+            <div class="kicker"><span>DFT / STA / GLS</span><span>Nov 2025 – Mar 2026</span></div>
+            <h3>DFT + Timing Analysis Workflows</h3>
+            <p class="desc">Gate-level + SDF timing simulation workflows and scan-based DFT experiments (90nm library setup).</p>
+            <ul>
+              <li>Timing-aware simulation and debug using reports/waveforms.</li>
+              <li><b>Tip:</b> add scan insertion steps / coverage details.</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">SystemVerilog</span><span class="chip">Xcelium</span><span class="chip">SDF</span><span class="chip">DFT</span><span class="chip">STA</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="sec-head"><h2>Skills</h2></div>
+        <div class="grid">
+          <div class="card span4">
+            <div class="kicker"><span>Digital / ASIC</span><span></span></div>
+            <div class="chips">
+              <span class="chip">RTL Design</span><span class="chip">Synthesis</span><span class="chip">PnR</span>
+              <span class="chip">CTS</span><span class="chip">STA</span><span class="chip">LEC</span><span class="chip">DFT</span>
+            </div>
+          </div>
+
+          <div class="card span4">
+            <div class="kicker"><span>Languages</span><span></span></div>
+            <div class="chips">
+              <span class="chip">Verilog</span><span class="chip">SystemVerilog</span><span class="chip">C</span>
+              <span class="chip">Embedded C</span><span class="chip">Python</span><span class="chip">Tcl</span>
+            </div>
+          </div>
+
+          <div class="card span4">
+            <div class="kicker"><span>Tools</span><span></span></div>
+            <div class="chips">
+              <span class="chip">Virtuoso</span><span class="chip">Genus</span><span class="chip">Innovus</span>
+              <span class="chip">Tempus</span><span class="chip">Conformal LEC</span><span class="chip">Xcelium</span>
+              <span class="chip">Vivado</span><span class="chip">Vitis</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="experience">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">03</span><h2>Experience</h2><div class="sec-line"></div></div>
-
-      <div class="grid" style="gap:14px;">
-        <div class="card">
-          <div class="proj-top">
-            <div>
-              <div class="proj-kicker">IndusIP Labs · Kochi</div>
-              <h3 style="margin-top:6px;">VLSI Intern</h3>
-            </div>
-            <div class="proj-kicker">Jul 2026 — Present</div>
+    <section id="experience">
+      <div class="wrap">
+        <div class="sec-head"><h2>Experience</h2></div>
+        <div class="grid">
+          <div class="card span12">
+            <div class="kicker"><span>IndusIP Labs · Kochi</span><span>Jul 2026 — Present</span></div>
+            <h3>VLSI Intern</h3>
+            <ul>
+              <li><b>Replace this with 2–3 concrete bullets</b> (what you built, tools used, result).</li>
+              <li>Example: “Implemented ____ in SystemVerilog; improved ____ by ____.”</li>
+            </ul>
           </div>
-          <ul class="list">
-            <li>Working on semiconductor platform workflows spanning spec → RTL → verification → implementation.</li>
-            <li><i>Replace with 2–3 concrete bullets:</i> what you built, tools used, measurable outcome.</li>
-          </ul>
+
+          <div class="card span12">
+            <div class="kicker"><span>NIT Calicut · ECE</span><span>May 2026 — Jul 2026</span></div>
+            <h3>Research Intern</h3>
+            <p class="desc">
+              Studied FPGA-based quantum control and emulation using QubiC (LBNL) tutorials; explored RPC architecture,
+              pulse-level programming, calibration workflows and emulator verification.
+            </p>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="card">
-          <div class="proj-top">
-            <div>
-              <div class="proj-kicker">NIT Calicut · ECE Dept</div>
-              <h3 style="margin-top:6px;">Research Intern</h3>
-            </div>
-            <div class="proj-kicker">May 2026 — Jul 2026</div>
+    <section id="education">
+      <div class="wrap">
+        <div class="sec-head"><h2>Education</h2></div>
+        <div class="grid">
+          <div class="card span6">
+            <div class="kicker"><span>CUSAT</span><span>Jul 2025 — Present</span></div>
+            <h3>M.Tech — VLSI & Embedded Systems</h3>
+            <p class="desc">CGPA: <b style="color:var(--accent2)">7.38</b></p>
           </div>
-          <p class="muted">
-            Studied FPGA-based quantum circuit control & emulation using QubiC (LBNL) tutorials; explored RPC-based architecture,
-            pulse-level programming, calibration workflows, and emulator verification.
+          <div class="card span6">
+            <div class="kicker"><span>GCE Kannur</span><span>Nov 2021 — Jun 2025</span></div>
+            <h3>B.Tech — ECE (Minor: CSE)</h3>
+            <p class="desc">CGPA: <b style="color:var(--accent2)">8.17</b></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="sec-head"><h2>Contact</h2></div>
+        <div class="panel">
+          <p style="color:var(--muted);margin-bottom:12px">
+            Best way to reach me: email or LinkedIn.
           </p>
-        </div>
-
-        <div class="card">
-          <div class="proj-top">
-            <div>
-              <div class="proj-kicker">NIELIT, Calicut</div>
-              <h3 style="margin-top:6px;">Student Intern</h3>
-            </div>
-            <div class="proj-kicker">Aug 2024</div>
-          </div>
-          <p class="muted">STM32 programming and peripheral-level debugging.</p>
-        </div>
-
-        <div class="card">
-          <div class="proj-top">
-            <div>
-              <div class="proj-kicker">Keltron, Kannur</div>
-              <h3 style="margin-top:6px;">Internship Trainee</h3>
-            </div>
-            <div class="proj-kicker">May 2023</div>
-          </div>
-          <p class="muted">Exposure to electronics manufacturing and production systems.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="education">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">04</span><h2>Education</h2><div class="sec-line"></div></div>
-
-      <div class="grid" style="gap:14px;">
-        <div class="card">
-          <div class="proj-top">
-            <div>
-              <div class="proj-kicker">CUSAT</div>
-              <h3 style="margin-top:6px;">M.Tech — VLSI & Embedded Systems</h3>
-              <p class="muted">Jul 2025 — Present</p>
-            </div>
-            <div class="proj-kicker">CGPA: <span style="color:var(--amber)">7.38</span></div>
+          <div class="btns">
+            <a class="btn primary" href="mailto:annmaryroy365@gmail.com">Email</a>
+            <a class="btn outline" href="https://www.linkedin.com/in/annmaryroy/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn outline" href="https://github.com/annmaryroy" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn outline" href="RESUME.pdf" target="_blank" rel="noopener">Resume</a>
           </div>
         </div>
 
-        <div class="card">
-          <div class="proj-top">
-            <div>
-              <div class="proj-kicker">Govt. College of Engineering, Kannur</div>
-              <h3 style="margin-top:6px;">B.Tech — Electronics & Communication Engineering</h3>
-              <p class="muted">Nov 2021 — Jun 2025 · Minor: CSE</p>
-            </div>
-            <div class="proj-kicker">CGPA: <span style="color:var(--amber)">8.17</span></div>
-          </div>
-        </div>
+        <footer>
+          © 2026 Ann Mary Roy · Professional engineering portfolio
+        </footer>
       </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">05</span><h2>Contact</h2><div class="sec-line"></div></div>
-
-      <div class="card">
-        <h3>Let’s build something on silicon.</h3>
-        <p class="muted" style="margin-top:8px">
-          Best way to reach me: email or LinkedIn.
-        </p>
-        <div class="actions" style="margin-top:14px">
-          <a class="btn primary" href="mailto:annmaryroy365@gmail.com">Email</a>
-          <a class="btn outline" href="https://www.linkedin.com/in/annmaryroy/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn outline" href="https://github.com/annmaryroy" target="_blank" rel="noopener">GitHub</a>
-
-          <!-- TODO: replace resume link -->
-          <a class="btn outline" href="RESUME.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-        </div>
-      </div>
-
-      <div class="foot" style="margin-top:18px">
-        <span>© 2026 Ann Mary Roy</span>
-        <span>REV 2026.07 — END OF DATASHEET</span>
-      </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 </body>
 </html>
